@@ -1,0 +1,207 @@
+{
+  "name": "Daily AI Digest",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5d622069-a119-4163-8add-61886c3e6267",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://hnrss.org/frontpage",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f9fa265a-d126-4abf-88c4-d2a213c355bc",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "maxItems": 15
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "b9c57dc1-5bd0-41fb-ad07-befa9cf31fa4",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "items",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        672,
+        0
+      ],
+      "id": "36b67240-e544-4f78-b168-1a8ebb31ed10",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You write a morning tech briefing for a full-stack developer (Next.js, Node, TypeScript).\nFrom the headlines below, pick the 5 most useful ones.\n\nRules:\n- Exactly 5 lines, numbered 1 to 5\n- Max 15 words per line, plain English, no hype words\n- End each line with its link wrapped in angle brackets, like <https://example.com>\n- Do not invent details that aren't in the headline\n\nHeadlines:\n{{ $json.items.map(i => '- ' + i.title + ' (' + i.link + ')').join('\\n') }}",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        784,
+        0
+      ],
+      "id": "7005ddc1-6191-4b49-9b2c-97ead0f7ad9f",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        720,
+        208
+      ],
+      "id": "de437f06-4ff6-4aa1-a6c2-30651dd95872",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "eCl4YFgw7kuauIc3",
+          "name": "Groq – P1 daily digest"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=   {{ $json.text.slice(0, 1990) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1152,
+        0
+      ],
+      "id": "42a07ad8-2ad8-4d9c-9275-373d1fcadbd7",
+      "name": "Discord",
+      "webhookId": "3a3e4bc8-1aaa-407c-bdcf-fde0653f3abe",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "Dc6RSGKywmGxxPjH",
+          "name": "Discord – AI Lab #daily-digest"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "207fa8b6-27f3-42cc-92a0-1aa1aaa0bf0d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2bf4267727e98f05c3a6218ba19e3d72dab1aa9126b5e785bfbd9593576d0a45"
+  },
+  "nodeGroups": [],
+  "id": "SGi1Sp1RHKCsIOGC",
+  "tags": []
+}
