@@ -76,13 +76,13 @@ Headlines:
 
 ## 🛠️ Tech Stack
 
-| Tool                     | Role                                           |
-| ------------------------ | ---------------------------------------------- |
-| 🔀 **n8n** (self-hosted) | Workflow orchestration                         |
-| 🐳 **Docker Compose**    | Runs n8n locally with persistent storage       |
-| ⚡ **Groq API**          | Fast LLM inference (`llama-3.3-70b-versatile`) |
-| 📡 **hnrss.org**         | Hacker News as an RSS feed                     |
-| 💬 **Discord Webhook**   | One-way delivery to my phone                   |
+| Tool                     | Role                                       |
+| ------------------------ | ------------------------------------------ |
+| 🔀 **n8n** (self-hosted) | Workflow orchestration                     |
+| 🐳 **Docker Compose**    | Runs n8n locally with persistent storage   |
+| ⚡ **Groq API**          | Fast LLM inference (`openai/gpt-oss-120b`) |
+| 📡 **hnrss.org**         | Hacker News as an RSS feed                 |
+| 💬 **Discord Webhook**   | One-way delivery to my phone               |
 
 ---
 
@@ -139,22 +139,19 @@ Click **Execute workflow** → check Discord → toggle **Active** or **Publish*
 
 <!-- Paste your two real outputs here — this comparison is the most interesting part of the README -->
 
-| 😵 Vague prompt | 🎯 Strict prompt |
-| --------------- | ---------------- |
+| 😵 Vague prompt |
+| --------------- |
 
-| [
-{
-[
-{
+[{
 "text": "**Summaries**\n\n| # | Title / Source | Core Summary |\n|---|----------------|--------------|\n| 1 | **Israeli airstrike on Nasser hospital in Gaza killed surgeon and others** – *The Guardian* (Nov 12 2026) | An Israeli airstrike hit Gaza’s Nasser Hospital, killing a surgeon and several other patients/medical staff. The report details the casualties, the hospital’s role in the conflict zone, and reactions from humanitarian groups calling the strike a possible violation of international law. |\n| 2 | **Nvidia Allegedly Engineered Scarcity by Funding AI Startups to Buy Its GPUs** – *TechPowerUp* | The article alleges that Nvidia covertly financed AI‑startup ventures and encouraged them to purchase large volumes of Nvidia GPUs, creating an artificial shortage that drove up prices and limited availability for other customers. It discusses the alleged strategy, market impact, and responses from industry analysts. |\n| 3 | **ggml v1.0.0** – *GitHub release* | The ggml project announced its first stable release (v1.0.0). The release notes highlight major performance improvements, new tensor operations, and a simplified API for building lightweight machine‑learning models that run on CPUs without GPU acceleration. |\n| 4 | **Nvidia director sold nearly $1B in stock weeks before the Jensen Huang scandal** – *Yahoo Finance* | A senior Nvidia board member reportedly sold almost $1 billion worth of company shares shortly before a high‑profile controversy involving CEO Jensen Huang (details of the scandal are not disclosed in the headline). The piece examines the timing, potential insider‑trading concerns, and market reaction. |\n| 5 | **Security Agencies Worldwide Found to Use Ad‑Based Surveillance System** – *Citizen Lab* | Research reveals that multiple national security agencies have adopted a commercial advertising‑tracking platform for mass surveillance. The report outlines how the system harvests user data, the legal/ethical implications, and recommendations for policy reform. |\n| 6 | **Elephants found to be increasingly isolated leading to fractured social networks** – *UCSD Today* | New field research shows that African/Asian elephant populations are experiencing higher rates of social isolation, breaking up long‑standing matriarchal bonds. Causes include habitat fragmentation, poaching pressure, and climate‑driven resource scarcity. |\n| 7 | **Amtrak booking system experiencing major issues amid nationwide FAA ground stop** – *Fox 5 DC* | Amid a nationwide FAA ground stop, Amtrak’s online ticketing platform suffered outages, leaving travelers unable to book or modify trips. The article links the technical glitch to increased traffic on transportation‑related services during the air‑traffic disruption. |\n| 8 | **Philip Roth and David Remnick getting personal (2001)** – *Salmagundi* | A 2001 essay explores the friendship and literary dialogue between novelist Philip Roth and *New Yorker* editor David Remnick, focusing on their personal correspondences, mutual influence, and the ways their private lives intersected with their public work. |\n| 9 | **Unsloth Qwen3.8‑27B Quantizations – Dynamic v3.1 Update** – *Unsloth.ai* | The latest Unsloth release (v3.1) adds dynamic quantization support for the Qwen‑3.8‑27B language model, improving inference speed and reducing memory usage while preserving accuracy. The documentation provides benchmark results and integration steps. |\n| 10 | **What Happened to 3Com?** – *DFARQ* | A retrospective examines the rise and fall of networking hardware company 3Com, covering its early successes, strategic missteps, competition with Cisco, and eventual acquisition by HP in 2010. The piece draws lessons about tech‑industry consolidation. |\n| 11 | **Show HN: Live map of U.S. flights during tonight's FAA nationwide ground stop** – *Grounds.top* | A community‑built web app visualizes real‑time flight data across the United States, highlighting which flights were delayed, rerouted, or cancelled during the FAA’s temporary nationwide ground stop on Nov 13 2026. |\n| 12 | **Terminal borders that don’t cost a cell** – *Joshka.net* | The article proposes a design concept for “cell‑free” terminal borders—physical or digital demarcations that separate airport terminals without relying on cellular‑based navigation or communication, aiming to improve passenger flow and reduce reliance on mobile devices. |\n| 13 | **How Not to Build a Music Player** – *Alicia Hraghi’s blog* | A post‑mortem of a failed open‑source music‑player project, detailing common pitfalls such as over‑engineering UI, neglecting cross‑platform audio APIs, and ignoring user feedback. The author shares lessons for developers building media applications. |\n| 14 | **Live airband on all frequencies from KORS. Victoria, CA also ground stopped** – *Orcas Airband* | KORS (a community radio station in Victoria, CA) streamed a live “airband” broadcast across all aviation frequencies, providing real‑time commentary during the FAA ground stop. The site also listed affected flights and offered updates. |\n| 15 | **FAA issues national ground stop – lifted 4.5 hours later** – *NBC News* | The FAA ordered a nationwide ground stop for departing flights on Nov 13 2026 due to safety concerns (weather‑related congestion). The restriction was lifted after 4.5 hours, and the article outlines the cause, impact on travelers, and steps taken to prevent future occurrences. |"
-}
-]
-}
-] | [
-{
+}]
+
+| 🎯 Strict prompt |
+| ---------------- |
+
+[{
 "text": "1. Nvidia allegedly created GPU scarcity by funding AI startups to purchase its chips <https://www.techpowerup.com/354814/nvidia-allegedly-engineered-scarcity-by-funding-ai-startups-to-buy-its-gpus> \n2. Ggml released version 1.0.0, a low‑level tensor library for machine‑learning inference <https://github.com/ggml-org/ggml/releases/tag/v1.0.0> \n3. Unsloth updated Qwen3.8‑27B quantization to dynamic v3.1, improving model size and speed <https://unsloth.ai/docs/models/qwen3.8> \n4. Security agencies worldwide use ad‑based surveillance systems, raising privacy concerns for web developers <https://citizenlab.ca/security-agencies-worldwide-found-to-use-ad-based-surveillance-system/> \n5. Show HN: live map of U.S. flights during FAA ground stop demonstrates real‑time data handling <https://grounds.top/>"
-}
-] |
+}]
 
 - ✅ Writing **output contracts** (exact line count, word limit, link format) so LLM output can go straight into another system
 - ✅ Using low temperature and "don't invent details" rules to reduce hallucination
